@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/btn_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="百度地图"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_gd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="高德地图"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btn_fz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分组布局"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btn_greendao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GreenDao"
+        android:onClick="onClick"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
