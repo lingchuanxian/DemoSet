@@ -43,6 +43,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_greendao:
                 Intent intentGreenDao = new Intent(this,GreenDaoActivity.class);
                 startActivity(intentGreenDao);
+                break;
+            case R.id.btn_switch:
+                Intent intentSwitch = new Intent(this,SwitchActivity.class);
+                startActivity(intentSwitch);
+                break;
+            case R.id.btn_XhsEmoticonsKeyboard:
+                Intent intentEmotionKeyboard = new Intent(this,EmoticonsKeyboardActivity.class);
+                startActivity(intentEmotionKeyboard);
+                break;
             default:
                 break;
         }

@@ -6,8 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.blankj.utilcode.util.SPUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.lingcx.demoset.Constant.SP_DISTURB_PATTERN;
+import static com.example.lingcx.demoset.Constant.SP_RING_REMIND;
 
 /**
  * @author ling_cx
@@ -35,7 +40,8 @@ public class GroupActivity extends AppCompatActivity {
         mData.add(new SectionItem(new Menu("账号与安全")));
         mData.add(new SectionItem(true,"2"));
         mData.add(new SectionItem(new Menu("新消息提醒")));
-        mData.add(new SectionItem(new Menu("勿扰模式")));
+        mData.add(new SectionItem(new Menu("响铃提醒",true, SPUtils.getInstance().getInt(SP_RING_REMIND,0)==1?true:false,SP_RING_REMIND)));
+        mData.add(new SectionItem(new Menu("勿扰模式",true,SPUtils.getInstance().getInt(SP_DISTURB_PATTERN,0)==1?true:false,SP_DISTURB_PATTERN)));
         mData.add(new SectionItem(new Menu("聊天")));
         mData.add(new SectionItem(new Menu("隐私")));
         mData.add(new SectionItem(new Menu("通用")));

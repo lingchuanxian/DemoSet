@@ -54,7 +54,8 @@
         <activity android:name=".GaodeMapActivity"></activity>
         <activity android:name=".GroupActivity"></activity>
         <activity android:name="cn.lingcx.demoset.activity.GreenDaoActivity"/>
-
+        <activity android:name=".SwitchActivity"/>
+        <activity android:name=".EmoticonsKeyboardActivity"/>
     </application>
 
 </manifest>

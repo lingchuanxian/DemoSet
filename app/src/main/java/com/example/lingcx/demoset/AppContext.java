@@ -3,6 +3,7 @@ package com.example.lingcx.demoset;
 import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.blankj.utilcode.util.Utils;
 
 /**
  * @author ling_cx
@@ -18,5 +19,6 @@ public class AppContext extends Application {
         //初始化百度地图SDK
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate();
+        Utils.init(this);
     }
 }
