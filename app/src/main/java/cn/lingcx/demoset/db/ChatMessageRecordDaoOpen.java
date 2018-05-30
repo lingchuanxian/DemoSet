@@ -3,6 +3,7 @@ package cn.lingcx.demoset.db;
 import android.content.Context;
 
 import org.greenrobot.greendao.query.QueryBuilder;
+import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
@@ -115,6 +116,18 @@ public class ChatMessageRecordDaoOpen {
         ChatMessageRecordDao ChatMessageRecordDao = DbManager.getDaoSession(context).getChatMessageRecordDao();
         List<ChatMessageRecord> listMsg = ChatMessageRecordDao.queryBuilder()
                 .offset(pageSize * pageNum).limit(pageNum).list();
+        return listMsg;
+    }
+
+    public static List<ChatMessageRecord> queryCondition( String speakId,String audienceId, Context context){
+        ChatMessageRecordDao ChatMessageRecordDao = DbManager.getDaoSession(context).getChatMessageRecordDao();
+        QueryBuilder<ChatMessageRecord> builder = ChatMessageRecordDao.queryBuilder();
+        WhereCondition condition1 = builder.and(cn.lingcx.demoset.dao.ChatMessageRecordDao.Properties.SpeakerId.eq(speakId), cn.lingcx.demoset.dao.ChatMessageRecordDao.Properties.AudienceId.eq(audienceId));
+        WhereCondition condition2 = builder.and(cn.lingcx.demoset.dao.ChatMessageRecordDao.Properties.SpeakerId.eq(audienceId), cn.lingcx.demoset.dao.ChatMessageRecordDao.Properties.AudienceId.eq(speakId));
+        WhereCondition condition3 = builder.or(condition1,condition2);
+        List<ChatMessageRecord> listMsg = builder
+                .where(condition3)
+                .list();
         return listMsg;
     }
 }

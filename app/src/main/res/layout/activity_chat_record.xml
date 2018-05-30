@@ -9,7 +9,13 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="增" />
+        android:text="增1" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="增2" />
 
     <Button
         android:id="@+id/button2"
@@ -41,6 +47,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="根据ID查询(分页查询)" />
+
+        <Button
+            android:id="@+id/btn_query_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="根据条件查询" />
 
         <Button
             android:id="@+id/button5"

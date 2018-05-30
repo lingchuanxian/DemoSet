@@ -70,12 +70,16 @@ public class GreenDaoActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.btn_query_all})
+    @OnClick({R.id.button,R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.btn_query_all,R.id.btn_query_condition})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button:
-                ChatMessageRecord recordss = new ChatMessageRecord("lingcx","sqfang",new Date(),"content",0,1);
+                ChatMessageRecord recordss = new ChatMessageRecord("cfn","cqq",new Date(),"content",0,1);
                 ChatMessageRecordDaoOpen.insertData(this, recordss);
+                break;
+            case R.id.button1:
+                ChatMessageRecord recordsss = new ChatMessageRecord("cqq","cfn",new Date(),"content",0,1);
+                ChatMessageRecordDaoOpen.insertData(this, recordsss);
                 break;
             case R.id.button2:
                 ChatMessageRecord record = new ChatMessageRecord("lingcx","sqfang",new Date(),"content"+1,0);
@@ -105,7 +109,7 @@ public class GreenDaoActivity extends AppCompatActivity {
                 ChatMessageRecordDaoOpen.deleteAllData(this);
                 break;
             case R.id.btn_query_all:
-                List<ChatMessageRecord> students2 = ChatMessageRecordDaoOpen.queryPaging(page, 20, this);
+                List<ChatMessageRecord> students2 = ChatMessageRecordDaoOpen.queryPaging(page, 2, this);
 
                 if (students2.size() == 0) {
                     Toast.makeText(this, "没有更多数据了", Toast.LENGTH_SHORT).show();
@@ -117,6 +121,13 @@ public class GreenDaoActivity extends AppCompatActivity {
                 page++;
                 mTvContent.setText(students2.toString());
                 break;
+            case R.id.btn_query_condition:
+                List<ChatMessageRecord> students3 = ChatMessageRecordDaoOpen.queryCondition("lingcx","sqfang",this);
+
+                mTvContent.setText(students3.toString());
+                break;
+            default:
+                    break;
         }
     }
 }
