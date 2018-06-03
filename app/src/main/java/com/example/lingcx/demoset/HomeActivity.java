@@ -52,6 +52,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentEmotionKeyboard = new Intent(this,EmoticonsKeyboardActivity.class);
                 startActivity(intentEmotionKeyboard);
                 break;
+            case R.id.btn_notification:
+                Intent intentNotification = new Intent(this,NotificationActivity.class);
+                startActivity(intentNotification);
+                break;
             default:
                 break;
         }

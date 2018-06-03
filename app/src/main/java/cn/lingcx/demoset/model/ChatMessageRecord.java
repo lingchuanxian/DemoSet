@@ -112,4 +112,5 @@ public class ChatMessageRecord {
     public void setTest(int test) {
         this.test = test;
     }
+
 }

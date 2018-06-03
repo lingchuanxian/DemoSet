@@ -20,6 +20,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.lingcx.demoset.db.ChatMessageRecordDaoOpen;
 import cn.lingcx.demoset.model.ChatMessageRecord;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author ling_cx
@@ -29,6 +38,7 @@ import cn.lingcx.demoset.model.ChatMessageRecord;
  * @copyright: 2018 www.kind.com.cn Inc. All rights reserved.
  */
 public class GreenDaoActivity extends AppCompatActivity {
+    protected final String TAG = this.getClass().getSimpleName();
     @BindView(R.id.button)
     Button mButton;
     @BindView(R.id.button2)
@@ -47,6 +57,7 @@ public class GreenDaoActivity extends AppCompatActivity {
     private List<ChatMessageRecord> mRecordList = new ArrayList<>();
 
     private int page;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,25 +75,41 @@ public class GreenDaoActivity extends AppCompatActivity {
      * 初始化数据
      */
     private void initData() {
+
         for (int i = 0; i < 100; i++) {
-            ChatMessageRecord record = new ChatMessageRecord("lingcx","sqfang",new Date(),"content"+i,0,i);
+            ChatMessageRecord record = new ChatMessageRecord("lingcx", "sqfang", new Date(), "content" + i, 0, i);
             mRecordList.add(record);
         }
     }
 
-    @OnClick({R.id.button,R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.btn_query_all,R.id.btn_query_condition})
+    @OnClick({R.id.button, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.btn_query_all, R.id.btn_query_condition})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button:
-                ChatMessageRecord recordss = new ChatMessageRecord("cfn","cqq",new Date(),"content",0,1);
-                ChatMessageRecordDaoOpen.insertData(this, recordss);
+                ChatMessageRecord recordss = new ChatMessageRecord("cfn", "cqq", new Date(), "content", 0, 1);
+                Observable.just(recordss)
+                        .observeOn(Schedulers.io())
+                        .subscribe(new Consumer<ChatMessageRecord>() {
+                            @Override
+                            public void accept(ChatMessageRecord record) throws Exception {
+                                ChatMessageRecordDaoOpen.insertData(GreenDaoActivity.this, record);
+                            }
+                        });
+
                 break;
             case R.id.button1:
-                ChatMessageRecord recordsss = new ChatMessageRecord("cqq","cfn",new Date(),"content",0,1);
-                ChatMessageRecordDaoOpen.insertData(this, recordsss);
+                ChatMessageRecord recordsss = new ChatMessageRecord("cqq", "cfn", new Date(), "content", 0, 1);
+                Observable.just(recordsss)
+                        .observeOn(Schedulers.io())
+                        .subscribe(new Consumer<ChatMessageRecord>() {
+                            @Override
+                            public void accept(ChatMessageRecord record) throws Exception {
+                                ChatMessageRecordDaoOpen.insertData(GreenDaoActivity.this, record);
+                            }
+                        });
                 break;
             case R.id.button2:
-                ChatMessageRecord record = new ChatMessageRecord("lingcx","sqfang",new Date(),"content"+1,0);
+                ChatMessageRecord record = new ChatMessageRecord("lingcx", "sqfang", new Date(), "content" + 1, 0);
                 /**
                  * 根据特定的对象删除
                  */
@@ -94,7 +121,7 @@ public class GreenDaoActivity extends AppCompatActivity {
                 ChatMessageRecordDaoOpen.deleteAllData(this);
                 break;
             case R.id.button3:
-                ChatMessageRecord updateRecord = new ChatMessageRecord("sqfang","lingcx",new Date(),"content"+1,0);
+                ChatMessageRecord updateRecord = new ChatMessageRecord("sqfang", "lingcx", new Date(), "content" + 1, 0);
                 ChatMessageRecordDaoOpen.updateData(this, updateRecord);
                 break;
             case R.id.button4:
@@ -109,25 +136,50 @@ public class GreenDaoActivity extends AppCompatActivity {
                 ChatMessageRecordDaoOpen.deleteAllData(this);
                 break;
             case R.id.btn_query_all:
-                List<ChatMessageRecord> students2 = ChatMessageRecordDaoOpen.queryPaging(page, 2, this);
+                final StringBuilder result = new StringBuilder();
+                Observable.create(new ObservableOnSubscribe<List<ChatMessageRecord>>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<List<ChatMessageRecord>> emitter) throws Exception {
+                        List<ChatMessageRecord> students2 = ChatMessageRecordDaoOpen.queryPaging(page, 2, GreenDaoActivity.this);
+                        Log.d(TAG, "subscribe: "+students2.size());
+                        emitter.onNext(students2);
+                    }
+                }).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .filter(new Predicate<List<ChatMessageRecord>>() {
+                            @Override
+                            public boolean test(List<ChatMessageRecord> records) throws Exception {
+                                if (records.size() == 0) {
+                                    Toast.makeText(GreenDaoActivity.this, "没有更多数据了", Toast.LENGTH_SHORT).show();
+                                    return false;
+                                }
+                                return true;
+                            }
+                        })
+                        .flatMap(new Function<List<ChatMessageRecord>, ObservableSource<ChatMessageRecord>>() {
+                            @Override
+                            public ObservableSource<ChatMessageRecord> apply(List<ChatMessageRecord> records) throws Exception {
+                                return Observable.fromIterable(records);
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<ChatMessageRecord>() {
+                            @Override
+                            public void accept(ChatMessageRecord record) throws Exception {
+                                result.append(record + "\n");
+                            }
+                        });
 
-                if (students2.size() == 0) {
-                    Toast.makeText(this, "没有更多数据了", Toast.LENGTH_SHORT).show();
-                }
-                for (ChatMessageRecord st : students2) {
-                    Log.e("TAG", "onViewClicked: ==" + st);
-                    Log.e("TAG", "onViewClicked: == num = " + st.getAudienceId());
-                }
+                mTvContent.setText(result);
                 page++;
-                mTvContent.setText(students2.toString());
                 break;
             case R.id.btn_query_condition:
-                List<ChatMessageRecord> students3 = ChatMessageRecordDaoOpen.queryCondition("lingcx","sqfang",this);
+                List<ChatMessageRecord> students3 = ChatMessageRecordDaoOpen.queryCondition("lingcx", "sqfang", this);
 
                 mTvContent.setText(students3.toString());
                 break;
             default:
-                    break;
+                break;
         }
     }
 }
