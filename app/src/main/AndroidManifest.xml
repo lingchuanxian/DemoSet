@@ -57,8 +57,9 @@
         <activity android:name="cn.lingcx.demoset.activity.GreenDaoActivity"/>
         <activity android:name=".SwitchActivity"/>
         <activity android:name=".EmoticonsKeyboardActivity"/>
-        <activity android:name=".NotificationActivity">
-        </activity>
+        <activity android:name=".NotificationActivity"/>
+        <activity android:name=".CoordinatorLayoutActivity"/>
+        <activity android:name=".WebViewActivity"/>
     </application>
 
 </manifest>

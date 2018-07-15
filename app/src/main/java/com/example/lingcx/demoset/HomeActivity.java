@@ -56,6 +56,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentNotification = new Intent(this,NotificationActivity.class);
                 startActivity(intentNotification);
                 break;
+            case R.id.btn_coordinatorLayout:
+                Intent intentCoordinatorLayout = new Intent(this,CoordinatorLayoutActivity.class);
+                startActivity(intentCoordinatorLayout);
+                break;
+            case R.id.btn_webview:
+                Intent intentWebView = new Intent(this,WebViewActivity.class);
+                startActivity(intentWebView);
+                break;
             default:
                 break;
         }
