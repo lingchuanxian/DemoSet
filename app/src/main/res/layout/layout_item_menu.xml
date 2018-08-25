@@ -17,12 +17,13 @@
             android:id="@+id/tv_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"/>
+            android:textSize="16sp"
+            android:paddingTop="@dimen/kind12"
+            android:paddingBottom="@dimen/kind12"/>
 
         <lingcx.kind.com.cn.library.KindSwitchButton
             android:id="@+id/kind_sw"
-            android:layout_width="36dp"
+            android:layout_width="@dimen/kind42"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

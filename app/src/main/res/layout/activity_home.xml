@@ -69,5 +69,25 @@
         android:text="WebView"
         android:onClick="onClick"/>
 
+    <Button
+        android:id="@+id/btn_zxing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zxing"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CalendarView"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btn_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CalendarView"
+        android:onClick="onClick"/>
 
 </com.google.android.flexbox.FlexboxLayout>

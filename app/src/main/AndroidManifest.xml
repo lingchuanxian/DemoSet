@@ -43,13 +43,14 @@
         </service>
         <service android:name="com.amap.api.location.APSService"/>
 
-        <activity android:name=".HomeActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".HomeActivity"/>
         <activity android:name=".ImagesShowActivity"/>
         <activity android:name=".BaiduMapActivity"/>
         <activity android:name=".GaodeMapActivity"/>
@@ -60,6 +61,8 @@
         <activity android:name=".NotificationActivity"/>
         <activity android:name=".CoordinatorLayoutActivity"/>
         <activity android:name=".WebViewActivity"/>
+        <activity android:name=".ZxingActivity"/>
+        <activity android:name=".CalendarViewActivity"/>
     </application>
 
 </manifest>

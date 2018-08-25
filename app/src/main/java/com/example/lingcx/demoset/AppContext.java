@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.blankj.utilcode.util.Utils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
  * @author ling_cx
@@ -20,5 +21,6 @@ public class AppContext extends Application {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate();
         Utils.init(this);
+        ZXingLibrary.initDisplayOpinion(this);
     }
 }
