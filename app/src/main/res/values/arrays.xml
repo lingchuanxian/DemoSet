@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="select">
+        <item>测试0001</item>
+        <item>测试0002</item>
+        <item>测试0003</item>
+        <item>测试0004</item>
+        <item>测试0005</item>
+    </string-array>
+</resources>

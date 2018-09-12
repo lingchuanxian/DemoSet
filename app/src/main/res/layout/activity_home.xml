@@ -90,4 +90,11 @@
         android:text="CalendarView"
         android:onClick="onClick"/>
 
+    <Button
+        android:id="@+id/btn_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dialog"
+        android:onClick="onClick"/>
+
 </com.google.android.flexbox.FlexboxLayout>

@@ -2,12 +2,15 @@ package com.example.lingcx.demoset;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.CustomListener;
@@ -39,6 +42,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private OptionsPickerView pvOptions;
     private List<IntervalModel> options1Items = new ArrayList<>();
     private Gson gson = new Gson();
+    private Integer[] mSelected;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +103,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_picker:
                 pvCustomTime.show();
+                break;
+            case R.id.btn_dialog:
+                new MaterialDialog.Builder(this)
+                        .title("请选择类型")
+                        .items(R.array.select)
+                        .itemsCallbackMultiChoice(mSelected, new MaterialDialog.ListCallbackMultiChoice() {
+                            @Override
+                            public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                /**
+                                 * If you use alwaysCallMultiChoiceCallback(), which is discussed below,
+                                 * returning false here won't allow the newly selected check box to actually be selected
+                                 * (or the newly unselected check box to be unchecked).
+                                 * See the limited multi choice dialog example in the sample project for details.
+                                 **/
+                                return true;
+                            }
+                        })
+                        .positiveText("确定")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                mSelected = dialog.getSelectedIndices();
+                            }
+                        })
+                        .show();
                 break;
             default:
                 break;
