@@ -63,6 +63,7 @@
         <activity android:name=".WebViewActivity"/>
         <activity android:name=".ZxingActivity"/>
         <activity android:name=".CalendarViewActivity"/>
+        <activity android:name=".MPAndroidChartActivity"/>
     </application>
 
 </manifest>

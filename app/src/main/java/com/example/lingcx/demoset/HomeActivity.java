@@ -52,6 +52,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         options1Items.add(new IntervalModel(0, "上午"));
         options1Items.add(new IntervalModel(1, "下午"));
         initOptionPicker();
+
+        String jsonData = "{'price':12}";
+        Gson gson = new Gson();
+        Model model = gson.fromJson(jsonData, Model.class);
+        System.out.println("price:"+model.getPrice());
     }
 
     @Override
@@ -128,6 +133,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .show();
+                break;
+            case R.id.btn_mpandroid_chart:
+                Intent intentMp = new Intent(this,MPAndroidChartActivity.class);
+                startActivity(intentMp);
                 break;
             default:
                 break;
